@@ -68,7 +68,7 @@ app.post('/api/rsvp', async (req, res) => {
       body: JSON.stringify({
         to: [{ email, name: `${fname} ${lname}` }],
         replyTo: { email: 'info@unitedchangerscoalition.org', name: 'UCC Founders\' Dinner' },
-        templateId: 1,
+        templateId: isPrepay ? 2 : 1,
         params: {
           FNAME:            fname,
           LNAME:            lname,
