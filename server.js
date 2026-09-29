@@ -67,26 +67,70 @@ app.post('/api/rsvp', async (req, res) => {
       })
     });
 
-    // ── Step 3: Airtable row ───────────────────────────────────────────────
+    // ── Step 3: Airtable — ensure fields exist, then write row ───────────
+    const AT_HEADERS = {
+      'Content-Type':  'application/json',
+      'Authorization': `Bearer ${AT_TOKEN}`
+    };
+
+    const REQUIRED_FIELDS = [
+      { name: 'First Name',         type: 'singleLineText' },
+      { name: 'Last Name',          type: 'singleLineText' },
+      { name: 'Email',              type: 'email' },
+      { name: 'Organization',       type: 'singleLineText' },
+      { name: 'Tier',               type: 'singleLineText' },
+      { name: 'Seats',              type: 'singleLineText' },
+      { name: 'Payment Preference', type: 'singleLineText' },
+      { name: 'Dietary / Access',   type: 'singleLineText' },
+      { name: 'Note to UCC',        type: 'multilineText'  },
+      { name: 'Submitted At',       type: 'singleLineText' }
+    ];
+
+    // Auto-create any missing fields
+    try {
+      const schemaRes = await fetch(
+        `https://api.airtable.com/v0/meta/bases/${AT_BASE}/tables`,
+        { headers: AT_HEADERS }
+      );
+      if (schemaRes.ok) {
+        const schema = await schemaRes.json();
+        const table  = (schema.tables || []).find(t => t.id === AT_TABLE);
+        const existingNames = new Set((table?.fields || []).map(f => f.name));
+        for (const field of REQUIRED_FIELDS) {
+          if (!existingNames.has(field.name)) {
+            await fetch(
+              `https://api.airtable.com/v0/meta/bases/${AT_BASE}/tables/${AT_TABLE}/fields`,
+              {
+                method: 'POST',
+                headers: AT_HEADERS,
+                body: JSON.stringify({ name: field.name, type: field.type })
+              }
+            );
+            console.log(`Created Airtable field: ${field.name}`);
+          }
+        }
+      }
+    } catch (schemaErr) {
+      console.error('Airtable schema check (non-fatal):', schemaErr.message);
+    }
+
+    // Write the record
     const atRes = await fetch(
       `https://api.airtable.com/v0/${AT_BASE}/${AT_TABLE}`,
       {
         method: 'POST',
-        headers: {
-          'Content-Type':  'application/json',
-          'Authorization': `Bearer ${AT_TOKEN}`
-        },
+        headers: AT_HEADERS,
         body: JSON.stringify({
           fields: {
             'First Name':          fname,
             'Last Name':           lname,
             'Email':               email,
-            'Organization':        org        || '',
+            'Organization':        org          || '',
             'Tier':                tierLabel,
             'Seats':               seatsLabel,
             'Payment Preference':  paymentLabel,
-            'Dietary / Access':    dietary    || '',
-            'Note to UCC':         note       || '',
+            'Dietary / Access':    dietary      || '',
+            'Note to UCC':         note         || '',
             'Submitted At':        new Date().toISOString()
           }
         })
@@ -95,8 +139,9 @@ app.post('/api/rsvp', async (req, res) => {
 
     if (!atRes.ok) {
       const atErr = await atRes.text();
-      console.error('Airtable error:', atErr);
-      // Don't fail the whole request — Brevo already succeeded
+      console.error('Airtable write error:', atErr);
+    } else {
+      console.log('Airtable record created successfully');
     }
 
     return res.status(200).json({ success: true });
