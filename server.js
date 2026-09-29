@@ -45,23 +45,47 @@ app.post('/api/rsvp', async (req, res) => {
     });
 
     // ── Step 2: Brevo confirmation email ──────────────────────────────────
+    // Compute amount string from seatsLabel (e.g. "2 seats" → $10,000)
+    const seatMatch  = (seatsLabel || '').match(/^(\d+)/);
+    const seatCount  = seatMatch ? parseInt(seatMatch[1]) : 1;
+    const amountStr  = seatsLabel && seatsLabel.includes('+')
+      ? 'Contact UCC'
+      : `$${(seatCount * 5000).toLocaleString()}`;
+
+    // Build the prepay URL so the email can link directly to /pay
+    const BASE_URL   = process.env.BASE_URL || 'https://ucc-dinner.onrender.com';
+    const payParams  = new URLSearchParams({
+      name:   `${fname} ${lname}`,
+      tier:   seatsLabel,
+      amount: amountStr,
+      email
+    });
+    const payLink    = `${BASE_URL}/pay?${payParams.toString()}`;
+
     await fetch('https://api.brevo.com/v3/smtp/email', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'api-key': BREVO_KEY },
       body: JSON.stringify({
         to: [{ email, name: `${fname} ${lname}` }],
+        replyTo: { email: 'info@unitedchangerscoalition.org', name: 'UCC Founders\' Dinner' },
         templateId: 1,
         params: {
+          FNAME:            fname,
+          LNAME:            lname,
+          ORG:              org || '',
           TIER:             tierLabel,
           SEATS:            seatsLabel,
+          AMOUNT:           amountStr,
+          IS_PREPAY:        isPrepay,
+          PAY_LINK:         payLink,
           PAYMENT_CHOICE:   isPrepay ? 'Prepay' : 'Pay at Event',
           PAYMENT_COLOR:    isPrepay ? '#2A9D8F' : '#5B2A86',
-          PAYMENT_HEADLINE: isPrepay ? 'Payment instructions incoming' : 'Your seat is held on your commitment',
+          PAYMENT_HEADLINE: isPrepay ? 'Complete your payment to lock your seat' : 'Your seat is held on your commitment',
           PAYMENT_BODY:     isPrepay
-            ? `UCC leadership will send wire or card instructions to ${email} within 24 hours. Seat held 72 hours.`
-            : `Payment due at check-in. Accepted: card, wire, or check. Reminder sent 7 days before event.`,
+            ? `Your seat is held for 72 hours. Use the link below to complete payment now, or wait for wire/card instructions from UCC within 24 hours.`
+            : `Payment is due at check-in. Accepted: card, wire, or check. A reminder will be sent 7 days before the event.`,
           NEXT_STEP_1:      isPrepay
-            ? 'Wire or card payment instructions arrive within 24 hours'
+            ? 'Complete payment via the link below — seat held 72 hours'
             : 'A payment reminder will be sent 7 days before the event'
         }
       })
