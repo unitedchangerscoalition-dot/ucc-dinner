@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Complete Payment — UCC Founders' Dinner</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,900;1,900&family=Bricolage+Grotesque:wght@400;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg:     #FFFCF5;
+      --ink:    #0E0E0E;
+      --red:    #E63946;
+      --amber:  #F4A261;
+      --green:  #2A9D8F;
+      --plum:   #5B2A86;
+      --paper:  #FAF1DC;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: 'Bricolage Grotesque', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ── NAV ── */
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 32px;
+      border-bottom: 2px solid var(--ink);
+      background: var(--bg);
+    }
+    .nav-logo {
+      font-family: 'Fraunces', serif;
+      font-weight: 900;
+      font-size: 18px;
+      letter-spacing: -0.02em;
+    }
+    .nav-tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      opacity: 0.5;
+    }
+
+    /* ── MAIN ── */
+    .pay-wrap {
+      flex: 1;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      padding: 48px 16px 80px;
+    }
+    .pay-card {
+      width: 100%;
+      max-width: 620px;
+      border: 2px solid var(--ink);
+      background: #fff;
+    }
+
+    /* Header */
+    .pay-header {
+      background: var(--ink);
+      color: var(--bg);
+      padding: 32px 36px;
+      border-bottom: 2px solid var(--ink);
+    }
+    .pay-eyebrow {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--amber);
+      margin-bottom: 10px;
+    }
+    .pay-headline {
+      font-family: 'Fraunces', serif;
+      font-weight: 900;
+      font-size: 28px;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+    }
+
+    /* Summary row */
+    .pay-summary {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      border-bottom: 2px solid var(--ink);
+    }
+    .pay-summary-item {
+      padding: 20px 24px;
+      border-right: 1px solid rgba(0,0,0,0.12);
+    }
+    .pay-summary-item:last-child { border-right: none; }
+    .pay-summary-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9px;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      opacity: 0.45;
+      margin-bottom: 6px;
+    }
+    .pay-summary-value {
+      font-family: 'Fraunces', serif;
+      font-weight: 900;
+      font-size: 15px;
+      letter-spacing: -0.01em;
+    }
+    #pay-amount-value { color: var(--green); }
+
+    /* Payment area */
+    .pay-body { padding: 36px; }
+    .pay-body-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--red);
+      margin-bottom: 20px;
+    }
+
+    /* Placeholder — replace this block with your payment embed */
+    .pay-placeholder {
+      border: 2px dashed rgba(0,0,0,0.18);
+      background: rgba(0,0,0,0.02);
+      padding: 48px 32px;
+      text-align: center;
+    }
+    .pay-placeholder-icon { font-size: 32px; margin-bottom: 16px; }
+    .pay-placeholder-title {
+      font-family: 'Fraunces', serif;
+      font-weight: 900;
+      font-size: 20px;
+      letter-spacing: -0.01em;
+      margin-bottom: 8px;
+    }
+    .pay-placeholder-sub {
+      font-size: 14px;
+      line-height: 1.6;
+      color: rgba(0,0,0,0.5);
+      max-width: 340px;
+      margin: 0 auto 24px;
+    }
+    .pay-contact-btn {
+      display: inline-block;
+      background: var(--ink);
+      color: var(--bg);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      padding: 14px 28px;
+      text-decoration: none;
+      border: 2px solid var(--ink);
+      transition: background 0.15s, color 0.15s;
+    }
+    .pay-contact-btn:hover { background: var(--red); border-color: var(--red); }
+
+    /* ── SWAP THIS SECTION IN when you have a payment link ──
+    .pay-link-btn {
+      display: block;
+      width: 100%;
+      background: var(--green);
+      color: #fff;
+      font-family: 'Fraunces', serif;
+      font-weight: 900;
+      font-size: 20px;
+      letter-spacing: -0.01em;
+      padding: 22px 32px;
+      text-align: center;
+      text-decoration: none;
+      border: 2px solid var(--green);
+      transition: background 0.15s;
+    }
+    .pay-link-btn:hover { background: #228a7f; }
+    ── END SWAP ── */
+
+    /* Footer note */
+    .pay-footer-note {
+      margin-top: 28px;
+      padding: 16px 20px;
+      border: 1px solid rgba(0,0,0,0.1);
+      background: var(--paper);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.06em;
+      line-height: 1.8;
+      color: rgba(0,0,0,0.5);
+    }
+
+    /* Next steps */
+    .pay-next {
+      padding: 0 36px 36px;
+      border-top: 1px solid rgba(0,0,0,0.08);
+    }
+    .pay-next-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--red);
+      padding: 24px 0 16px;
+    }
+    .pay-step {
+      padding: 10px 0;
+      border-bottom: 1px solid rgba(0,0,0,0.07);
+      font-size: 13px;
+      font-weight: 600;
+      display: flex;
+      gap: 10px;
+    }
+    .pay-step span { color: var(--red); flex-shrink: 0; }
+
+    @media (max-width: 540px) {
+      .nav { padding: 14px 16px; }
+      .pay-header { padding: 24px 20px; }
+      .pay-summary { grid-template-columns: 1fr 1fr; }
+      .pay-summary-item:nth-child(3) { border-top: 1px solid rgba(0,0,0,0.12); grid-column: span 2; }
+      .pay-body { padding: 24px 20px; }
+      .pay-next { padding: 0 20px 28px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="nav">
+    <div class="nav-logo">UCC Founders' Dinner</div>
+    <div class="nav-tag">Secure · Invite Only</div>
+  </nav>
+
+  <div class="pay-wrap">
+    <div class="pay-card">
+
+      <div class="pay-header">
+        <div class="pay-eyebrow">Step 2 of 2 — Complete Payment</div>
+        <div class="pay-headline">Secure your seat<br><em>with payment.</em></div>
+      </div>
+
+      <div class="pay-summary">
+        <div class="pay-summary-item">
+          <div class="pay-summary-label">Guest</div>
+          <div class="pay-summary-value" id="pay-name-value">—</div>
+        </div>
+        <div class="pay-summary-item">
+          <div class="pay-summary-label">Reservation</div>
+          <div class="pay-summary-value" id="pay-tier-value">—</div>
+        </div>
+        <div class="pay-summary-item">
+          <div class="pay-summary-label">Amount due</div>
+          <div class="pay-summary-value" id="pay-amount-value">—</div>
+        </div>
+      </div>
+
+      <div class="pay-body">
+        <div class="pay-body-label">Payment</div>
+
+        <!-- ═══════════════════════════════════════════════════════════════
+             PAYMENT EMBED ZONE
+             Replace the .pay-placeholder div below with your payment link:
+
+             Option A — Button link:
+             <a href="YOUR_PAYMENT_LINK" class="pay-link-btn" target="_blank">
+               Pay Now →
+             </a>
+
+             Option B — Stripe/PayPal/Square iframe:
+             <iframe src="YOUR_CHECKOUT_URL" width="100%" height="600"
+               frameborder="0" style="border:none;"></iframe>
+        ═══════════════════════════════════════════════════════════════ -->
+
+        <div class="pay-placeholder">
+          <div class="pay-placeholder-icon">🔒</div>
+          <div class="pay-placeholder-title">Payment link coming soon.</div>
+          <div class="pay-placeholder-sub">
+            UCC leadership will send wire transfer or card payment instructions
+            to your email within 24 hours. Your seat is held for 72 hours.
+          </div>
+          <a href="mailto:info@unitedchangerscoalition.com" class="pay-contact-btn">
+            Contact UCC Directly →
+          </a>
+        </div>
+
+        <div class="pay-footer-note">
+          Your reservation is confirmed. This payment step secures your seat permanently.
+          Accepted methods: wire transfer, card, or check. All contributions benefit the
+          UCC Education Fund — a 501(c)(3) nonprofit. Tax-deductible to the extent permitted by law.
+        </div>
+      </div>
+
+      <div class="pay-next">
+        <div class="pay-next-label">What happens next</div>
+        <div class="pay-step"><span>→</span>Check your email — a confirmation was sent when you registered</div>
+        <div class="pay-step"><span>→</span>Payment instructions will arrive within 24 hours</div>
+        <div class="pay-step"><span>→</span>Your seat is held for 72 hours pending payment</div>
+        <div class="pay-step"><span>→</span>Venue and logistics confirmed 14 days before the event</div>
+        <div class="pay-step" style="border-bottom:none;"><span>→</span>Questions? Reply directly to your confirmation email</div>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    // Pull name, tier, amount from URL params set by the RSVP form
+    const params = new URLSearchParams(window.location.search);
+    const name   = params.get('name')   || '';
+    const tier   = params.get('tier')   || '';
+    const amount = params.get('amount') || '';
+
+    if (name)   document.getElementById('pay-name-value').textContent   = name;
+    if (tier)   document.getElementById('pay-tier-value').textContent   = tier;
+    if (amount) document.getElementById('pay-amount-value').textContent = amount;
+  </script>
+
+</body>
+</html>

@@ -1470,7 +1470,21 @@ async function submitRSVP() {
     const data = await res.json();
     if (!res.ok || !data.success) throw new Error(data.error || 'Submission failed');
 
-    // Hide form fields, show confirmation card — make sure parent is visible
+    // Prepay → redirect to /pay with guest details; Pay at door → show inline card
+    if (payment === 'prepay') {
+      const seatCount = parseInt(tierVal) || 1;
+      const amount    = tierVal === 'custom' ? 'Contact UCC' : '$' + (seatCount * 5000).toLocaleString();
+      const params    = new URLSearchParams({
+        name:   fname + ' ' + lname,
+        tier:   seatsLabel,
+        amount: amount,
+        email:  email
+      });
+      window.location.href = '/pay?' + params.toString();
+      return; // navigation underway
+    }
+
+    // Pay at door — show inline confirmation card
     document.querySelector('.rsvp-form-body').style.display = 'none';
     const successEl = document.getElementById('rsvpSuccess');
     successEl.style.display = 'block';
