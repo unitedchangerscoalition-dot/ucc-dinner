@@ -1,0 +1,1502 @@
+<!DOCTYPE html>
+<html lang="en" style="color-scheme: light; background: #FFFCF5;">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>United Changers Coalition — Private</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,900;1,9..144,400;1,9..144,900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #FFFCF5;
+  --ink: #0E0E0E;
+  --red: #E63946;
+  --amber: #F4A261;
+  --green: #2A9D8F;
+  --plum: #5B2A86;
+  --paper: #FAF1DC;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html {
+  scroll-behavior: smooth;
+  color-scheme: light;
+}
+body {
+  background: #FFFCF5 !important;
+  color: #0E0E0E !important;
+  font-family: 'Bricolage Grotesque', sans-serif;
+  overflow-x: hidden;
+  line-height: 1.4;
+  min-height: 100vh;
+  -webkit-text-size-adjust: 100%;
+}
+
+/* grain — dark dots on cream */
+body::before {
+  content: '';
+  position: fixed; inset: 0;
+  background-image:
+    radial-gradient(circle at 20% 30%, rgba(0,0,0,0.025) 1px, transparent 1px),
+    radial-gradient(circle at 70% 60%, rgba(0,0,0,0.02) 1px, transparent 1px);
+  background-size: 4px 4px, 7px 7px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ============================
+   GATE SCREEN — Direction 1 light
+   cream bg · ink text · hard borders
+   ============================ */
+#gate {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 24px;
+  position: relative;
+  z-index: 10;
+  background: #FFFCF5 !important;
+}
+
+.gate-emblem {
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 600;
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #0E0E0E;
+  margin-bottom: 48px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.gate-emblem::before,
+.gate-emblem::after {
+  content: '';
+  width: 32px;
+  height: 2px;
+  background: #E63946;
+}
+
+/* invitation card — heavy ink border like the main site */
+.gate-card {
+  border: 3px solid #0E0E0E;
+  background: #FAF1DC;
+  padding: 56px 52px;
+  max-width: 500px;
+  width: 100%;
+  position: relative;
+  text-align: center;
+  box-shadow: 8px 8px 0 #0E0E0E;
+}
+
+/* inner ruled border — like the invite card */
+.gate-card::before {
+  content: '';
+  position: absolute;
+  inset: 10px;
+  border: 1px solid rgba(0,0,0,0.12);
+  pointer-events: none;
+}
+
+.gate-card::after {
+  content: '✱';
+  position: absolute;
+  bottom: 18px;
+  right: 22px;
+  font-size: 16px;
+  color: #E63946;
+  opacity: 0.6;
+}
+
+.gate-eyebrow {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: #0E0E0E;
+  opacity: 0.45;
+  margin-bottom: 20px;
+}
+
+.gate-title {
+  font-family: 'Fraunces', serif;
+  font-weight: 900;
+  font-size: clamp(44px, 10vw, 64px);
+  line-height: 0.9;
+  letter-spacing: -0.04em;
+  margin-bottom: 6px;
+  color: #0E0E0E !important;
+}
+.gate-title em {
+  font-style: italic;
+  color: #E63946 !important;
+}
+
+.gate-subtitle {
+  font-family: 'Fraunces', serif;
+  font-weight: 900;
+  font-size: 24px;
+  letter-spacing: -0.02em;
+  color: #5B2A86 !important;
+  font-style: italic;
+  margin-bottom: 36px;
+}
+
+.gate-divider {
+  width: 40px;
+  height: 2px;
+  background: #E63946;
+  margin: 0 auto 28px;
+}
+
+.gate-desc {
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-size: 14px;
+  line-height: 1.65;
+  color: #0E0E0E !important;
+  opacity: 0.6;
+  margin-bottom: 36px;
+  max-width: 340px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.gate-input-wrap {
+  position: relative;
+  margin-bottom: 10px;
+}
+
+.gate-input {
+  width: 100%;
+  background: #FFFCF5 !important;
+  border: 2px solid #0E0E0E !important;
+  color: #0E0E0E !important;
+  padding: 16px 20px;
+  font-family: 'JetBrains Mono', monospace !important;
+  font-size: 20px !important;
+  font-weight: 600;
+  letter-spacing: 0.25em;
+  text-align: center;
+  text-transform: uppercase;
+  outline: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  -webkit-appearance: none;
+  border-radius: 0 !important;
+  caret-color: #E63946;
+}
+.gate-input::placeholder {
+  color: rgba(0,0,0,0.25) !important;
+  letter-spacing: 0.1em;
+  font-size: 13px !important;
+  font-weight: 400;
+}
+.gate-input:focus {
+  border-color: #E63946 !important;
+  box-shadow: 4px 4px 0 #0E0E0E;
+}
+.gate-input.error {
+  border-color: #E63946 !important;
+  animation: shake 0.35s ease;
+}
+.gate-input.success {
+  border-color: #2A9D8F !important;
+  box-shadow: 4px 4px 0 #0E0E0E;
+}
+
+@keyframes shake {
+  0%,100% { transform: translateX(0); }
+  20% { transform: translateX(-6px); }
+  40% { transform: translateX(6px); }
+  60% { transform: translateX(-4px); }
+  80% { transform: translateX(4px); }
+}
+
+.gate-error {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: #E63946 !important;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  height: 20px;
+  margin-bottom: 16px;
+}
+
+/* Direction 1 button — ink bg, cream text, offset shadow on hover */
+.gate-btn {
+  width: 100%;
+  background: #0E0E0E !important;
+  color: #FFFCF5 !important;
+  border: 2px solid #0E0E0E !important;
+  padding: 18px;
+  font-family: 'Bricolage Grotesque', sans-serif !important;
+  font-weight: 800;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  margin-bottom: 20px;
+  -webkit-appearance: none;
+  border-radius: 0 !important;
+}
+.gate-btn:hover {
+  background: #E63946 !important;
+  border-color: #E63946 !important;
+  transform: translate(-3px, -3px);
+  box-shadow: 5px 5px 0 #0E0E0E;
+}
+.gate-btn:active { transform: translate(0,0); box-shadow: none; }
+
+.gate-hint {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: #0E0E0E !important;
+  opacity: 0.3;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  line-height: 1.7;
+}
+
+.gate-btn.loading {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.gate-success-msg {
+  display: none;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: #2A9D8F !important;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  margin-bottom: 14px;
+}
+
+/* ============================
+   INNER PAGE (hidden until unlocked)
+   ============================ */
+#inner {
+  display: none;
+  background: var(--bg);
+  color: var(--ink);
+  min-height: 100vh;
+}
+
+/* grain on inner page */
+#inner::before {
+  content: '';
+  position: fixed; inset: 0;
+  background-image:
+    radial-gradient(circle at 20% 30%, rgba(0,0,0,0.025) 1px, transparent 1px),
+    radial-gradient(circle at 70% 60%, rgba(0,0,0,0.02) 1px, transparent 1px);
+  background-size: 4px 4px, 7px 7px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* TOP STRIP */
+.strip {
+  background: var(--plum);
+  color: var(--bg);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 8px 0;
+  overflow: hidden;
+  position: relative;
+  z-index: 20;
+}
+.strip-track {
+  display: flex;
+  gap: 48px;
+  white-space: nowrap;
+  animation: marquee 35s linear infinite;
+}
+.strip-track span { display: inline-flex; align-items: center; gap: 12px; }
+.strip-track span::before { content: '✱'; color: var(--amber); }
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+/* NAV */
+.inner-nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  padding: 18px 48px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid var(--ink);
+  background: var(--bg);
+}
+.logo {
+  font-family: 'Fraunces', serif;
+  font-weight: 900;
+  font-size: 20px;
+  letter-spacing: -0.02em;
+}
+.logo .ucc {
+  background: var(--red);
+  color: var(--bg);
+  padding: 2px 8px 4px;
+  margin-right: 4px;
+  display: inline-block;
+  transform: rotate(-2deg);
+}
+.private-badge {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  background: var(--plum);
+  color: var(--bg);
+  padding: 4px 12px;
+}
+
+/* HERO — sealed envelope aesthetic */
+.private-hero {
+  background: var(--ink);
+  color: var(--bg);
+  padding: 80px 48px;
+  position: relative;
+  z-index: 5;
+  overflow: hidden;
+  border-bottom: 2px solid var(--amber);
+}
+.private-hero::before {
+  content: 'PRIVATE';
+  position: absolute;
+  right: -40px;
+  top: 50%;
+  transform: translateY(-50%) rotate(-90deg);
+  font-family: 'Fraunces', serif;
+  font-weight: 900;
+  font-style: italic;
+  font-size: 240px;
+  letter-spacing: -0.06em;
+  color: rgba(255,255,255,0.03);
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+.private-hero-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+
+.hero-left {}
+.hero-eyebrow {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  color: var(--amber);
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.hero-eyebrow::before { content: ''; width: 24px; height: 1px; background: var(--amber); }
+
+.hero-h1 {
+  font-family: 'Fraunces', serif;
+  font-weight: 900;
+  font-size: clamp(52px, 6vw, 96px);
+  line-height: 0.88;
+  letter-spacing: -0.04em;
+  margin-bottom: 28px;
+}
+.hero-h1 em { font-style: italic; color: var(--amber); }
+
+.hero-desc {
+  font-size: 17px;
+  line-height: 1.65;
+  color: rgba(255,255,255,0.7);
+  max-width: 480px;
+  margin-bottom: 36px;
+}
+
+.hero-meta {
+  display: flex;
+  gap: 0;
+  border: 1px solid rgba(255,255,255,0.15);
+}
+.hero-meta-item {
+  padding: 18px 24px;
+  border-right: 1px solid rgba(255,255,255,0.15);
+  flex: 1;
+}
+.hero-meta-item:last-child { border-right: none; }
+.hmi-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: rgba(255,255,255,0.35);
+  margin-bottom: 6px;
+}
+.hmi-val {
+  font-family: 'Fraunces', serif;
+  font-weight: 900;
+  font-size: 20px;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+/* right side — goal tracker */
+.goal-box {
+  border: 2px solid rgba(255,255,255,0.15);
+  background: rgba(255,255,255,0.03);
+  padding: 36px;
+}
+.goal-box-header {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--amber);
+  margin-bottom: 24px;
+  display: flex;
+  justify-content: space-between;
+}
+.goal-amount {
+  font-family: 'Fraunces', serif;
+  font-weight: 900;
+  font-size: 64px;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  margin-bottom: 4px;
+}
+.goal-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: rgba(255,255,255,0.4);
+  margin-bottom: 24px;
+}
+.progress-track {
+  width: 100%;
+  height: 8px;
+  background: rgba(255,255,255,0.1);
+  margin-bottom: 8px;
+  position: relative;
+}
+.progress-fill {
+  height: 100%;
+  background: var(--amber);
+  width: 0%;
+  transition: width 1.5s cubic-bezier(0.2,0.8,0.2,1);
+}
+.progress-labels {
+  display: flex;
+  justify-content: space-between;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: rgba(255,255,255,0.35);
+  letter-spacing: 0.1em;
+  margin-bottom: 28px;
+}
+.goal-seats {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 10px;
+}
+.seat-stat {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  padding: 14px 12px;
+  text-align: center;
+}
+.seat-num {
+  font-family: 'Fraunces', serif;
+  font-weight: 900;
+  font-size: 26px;
+  letter-spacing: -0.02em;
+  margin-bottom: 4px;
+}
+.seat-lbl {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: rgba(255,255,255,0.4);
+}
+
+/* TIERS */
+.private-tiers {
+  padding: 80px 48px;
+  border-bottom: 2px solid var(--ink);
+  position: relative;
+  z-index: 5;
+}
+.pt-inner { max-width: 1200px; margin: 0 auto; }
+
+.section-eyebrow {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+.section-eyebrow::before { content: ''; width: 24px; height: 2px; background: var(--red); }
+
+.section-h {
+  font-family: 'Fraunces', serif;
+  font-weight: 900;
+  font-size: clamp(40px, 5vw, 72px);
+  line-height: 0.93;
+  letter-spacing: -0.03em;
+  margin-bottom: 12px;
+}
+.section-h em { color: var(--red); font-style: italic; }
+.section-sub {
+  font-size: 16px;
+  line-height: 1.6;
+  max-width: 560px;
+  color: #333;
+  margin-bottom: 48px;
+}
+
+/* C3 compliance bar */
+.c3-bar {
+  background: #E8F5E4;
+  border: 2px solid var(--green);
+  padding: 14px 20px;
+  margin-bottom: 28px;
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+}
+.c3-pill {
+  background: var(--green);
+  color: var(--bg);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  padding: 4px 10px;
+  white-space: nowrap;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+.c3-bar p { font-size: 13px; line-height: 1.55; color: #1a3d1a; }
+
+.tiers-grid {
+  display: grid;
+  grid-template-columns: repeat(4,1fr);
+  gap: 0;
+  border: 2px solid var(--ink);
+}
+.tier {
+  padding: 36px 26px;
+  border-right: 2px solid var(--ink);
+  background: var(--bg);
+  transition: background 0.15s ease;
+}
+.tier:last-child { border-right: none; }
+.tier:hover { background: var(--paper); }
+.tier.hot { background: var(--ink); color: var(--bg); }
+.tier.hot:hover { background: #1c1c1c; }
+
+.tier-tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  padding: 4px 10px;
+  border: 1.5px solid;
+  display: inline-block;
+  margin-bottom: 14px;
+}
+.tag-green { background: var(--green); border-color: transparent; color: var(--bg); }
+.tag-amber { background: var(--amber); border-color: transparent; color: var(--ink); }
+.tag-red { background: var(--red); border-color: transparent; color: var(--bg); }
+.tag-plum { background: var(--plum); border-color: transparent; color: var(--bg); }
+
+.tier-price {
+  font-family: 'Fraunces', serif;
+  font-weight: 900;
+  font-size: 52px;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  margin-bottom: 2px;
+}
+.tier-price-note {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  opacity: 0.5;
+  margin-bottom: 18px;
+}
+.tier-name {
+  font-family: 'Fraunces', serif;
+  font-weight: 900;
+  font-size: 24px;
+  letter-spacing: -0.02em;
+  margin-bottom: 18px;
+  line-height: 1;
+}
+.tier-list { list-style: none; margin-bottom: 28px; }
+.tier-list li {
+  padding: 8px 0;
+  font-size: 12px;
+  font-weight: 600;
+  border-bottom: 1px solid rgba(0,0,0,0.08);
+  display: flex;
+  gap: 8px;
+}
+.tier.hot .tier-list li { border-color: rgba(255,255,255,0.1); }
+.tier-list li::before { content: '→'; opacity: 0.5; flex-shrink: 0; }
+
+.tier-btn {
+  width: 100%;
+  padding: 13px;
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-weight: 800;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  cursor: pointer;
+  border: 2px solid var(--ink);
+  background: transparent;
+  color: var(--ink);
+  transition: all 0.15s ease;
+}
+.tier-btn:hover { background: var(--ink); color: var(--bg); transform: translate(-2px,-2px); box-shadow: 3px 3px 0 rgba(0,0,0,0.25); }
+.tier.hot .tier-btn { background: var(--red); color: var(--bg); border-color: var(--red); }
+.tier.hot .tier-btn:hover { background: var(--amber); border-color: var(--amber); color: var(--ink); }
+
+/* RSVP FORM */
+.rsvp-section {
+  padding: 80px 48px;
+  background: var(--paper);
+  border-bottom: 2px solid var(--ink);
+  position: relative;
+  z-index: 5;
+}
+.rsvp-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 64px;
+  align-items: start;
+}
+
+.rsvp-form-card {
+  border: 2px solid var(--ink);
+  background: var(--bg);
+}
+.rsvp-form-header {
+  background: var(--ink);
+  color: var(--bg);
+  padding: 20px 28px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.rsvp-form-header h3 {
+  font-family: 'Fraunces', serif;
+  font-weight: 900;
+  font-size: 22px;
+  letter-spacing: -0.01em;
+}
+.rsvp-form-header span {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--amber);
+}
+.rsvp-form-body { padding: 28px; }
+
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px; }
+.form-full { grid-column: span 2; }
+.form-input {
+  width: 100%;
+  background: var(--paper);
+  border: 2px solid var(--ink);
+  color: var(--ink);
+  padding: 12px 14px;
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  outline: none;
+  transition: border-color 0.15s;
+}
+.form-input::placeholder { color: rgba(0,0,0,0.3); font-weight: 400; font-size: 13px; }
+.form-input:focus { border-color: var(--red); }
+
+.form-select {
+  width: 100%;
+  background: var(--paper);
+  border: 2px solid var(--ink);
+  color: var(--ink);
+  padding: 12px 14px;
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  outline: none;
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='7'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%230E0E0E' stroke-width='2' fill='none'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  padding-right: 36px;
+}
+.form-select:focus { border-color: var(--red); }
+
+.form-textarea {
+  width: 100%;
+  background: var(--paper);
+  border: 2px solid var(--ink);
+  color: var(--ink);
+  padding: 12px 14px;
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  outline: none;
+  resize: vertical;
+  min-height: 90px;
+  line-height: 1.5;
+}
+.form-textarea::placeholder { color: rgba(0,0,0,0.3); font-weight: 400; font-size: 13px; }
+.form-textarea:focus { border-color: var(--red); }
+
+.form-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: rgba(0,0,0,0.5);
+  margin-bottom: 6px;
+  display: block;
+  margin-top: 14px;
+}
+
+.rsvp-submit {
+  width: 100%;
+  background: var(--red);
+  color: var(--bg);
+  border: 2px solid var(--ink);
+  padding: 16px;
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-weight: 800;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  margin-top: 20px;
+}
+.rsvp-submit:hover {
+  transform: translate(-2px,-2px);
+  box-shadow: 4px 4px 0 var(--ink);
+}
+
+/* Right info panel */
+.rsvp-info {}
+.info-block {
+  margin-bottom: 32px;
+  padding-bottom: 32px;
+  border-bottom: 1px solid rgba(0,0,0,0.1);
+}
+.info-block:last-child { border-bottom: none; }
+.info-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--red);
+  margin-bottom: 8px;
+}
+.info-val {
+  font-family: 'Fraunces', serif;
+  font-weight: 900;
+  font-size: 26px;
+  letter-spacing: -0.02em;
+  margin-bottom: 6px;
+  line-height: 1.1;
+}
+.info-desc { font-size: 14px; color: #444; line-height: 1.55; }
+
+.who-list { list-style: none; margin-top: 12px; }
+.who-list li {
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(0,0,0,0.08);
+  font-size: 13px;
+  font-weight: 600;
+  display: flex;
+  gap: 10px;
+}
+.who-list li::before { content: '→'; color: var(--red); }
+
+/* LEGAL FOOTER */
+.legal-footer {
+  background: var(--ink);
+  color: rgba(255,255,255,0.4);
+  padding: 36px 48px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9.5px;
+  line-height: 1.8;
+  letter-spacing: 0.04em;
+  position: relative;
+  z-index: 5;
+}
+.legal-footer-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  gap: 40px;
+}
+.legal-footer .logo-small {
+  font-family: 'Fraunces', serif;
+  font-weight: 900;
+  font-size: 20px;
+  color: rgba(255,255,255,0.2);
+  letter-spacing: -0.02em;
+  margin-bottom: 12px;
+}
+
+/* ANIMATIONS */
+@keyframes fadeIn { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+.inner-animate { animation: fadeIn 0.7s cubic-bezier(0.2,0.8,0.2,1) forwards; }
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  .private-hero-inner { grid-template-columns: 1fr; gap: 48px; }
+  .tiers-grid { grid-template-columns: 1fr 1fr; }
+  .rsvp-inner { grid-template-columns: 1fr; }
+  .inner-nav { padding: 14px 20px; }
+  .private-tiers, .rsvp-section, .private-hero { padding-left: 20px; padding-right: 20px; }
+  .gate-card { padding: 40px 28px; }
+}
+@media (max-width: 600px) {
+  .tiers-grid { grid-template-columns: 1fr; }
+  .form-row { grid-template-columns: 1fr; }
+  .form-full { grid-column: span 1; }
+}
+</style>
+</head>
+<body>
+
+<!-- ============================
+     GATE SCREEN
+     ============================ -->
+<div id="gate">
+  <div class="gate-emblem">United Changers Coalition</div>
+
+  <div class="gate-card">
+    <div class="gate-eyebrow">Private · Invite Only · Founders' Dinner 2026</div>
+    <h1 class="gate-title">The <em>Founders'</em></h1>
+    <div class="gate-subtitle">Dinner</div>
+    <div class="gate-divider"></div>
+    <p class="gate-desc">This page is private and accessible by invitation only. Enter the access code from your invitation to continue.</p>
+
+    <div class="gate-input-wrap">
+      <input
+        class="gate-input"
+        id="codeInput"
+        type="text"
+        placeholder="Enter access code"
+        maxlength="20"
+        autocomplete="off"
+        autocorrect="off"
+        autocapitalize="characters"
+        spellcheck="false"
+        aria-label="Invitation access code"
+      />
+    </div>
+
+    <div class="gate-error" id="gateError" aria-live="polite"></div>
+    <div class="gate-success-msg" id="gateSuccess">✓ Code accepted — unlocking your invitation</div>
+
+    <button class="gate-btn" id="gateBtn" onclick="checkCode()">
+      Enter →
+    </button>
+
+    <div class="gate-hint">
+      Received an invitation from UCC leadership?<br/>
+      Your access code is in your personal invite message.
+    </div>
+  </div>
+</div>
+
+<!-- ============================
+     INNER PRIVATE PAGE
+     ============================ -->
+<div id="inner">
+
+  <!-- STRIP -->
+  <div class="strip" aria-hidden="true">
+    <div class="strip-track">
+      <span>Private · 50 Seats · Invite Only</span>
+      <span>Founders' Dinner · Atlanta 2026</span>
+      <span>Patron $5,000 · Benefactor $10,000</span>
+      <span>UCC Education Fund · 501(c)(3)</span>
+      <span>Goal: $500,000</span>
+      <span>Private · 50 Seats · Invite Only</span>
+      <span>Founders' Dinner · Atlanta 2026</span>
+      <span>Patron $5,000 · Benefactor $10,000</span>
+      <span>UCC Education Fund · 501(c)(3)</span>
+      <span>Goal: $500,000</span>
+    </div>
+  </div>
+
+  <!-- NAV -->
+  <nav class="inner-nav">
+    <div class="logo"><span class="ucc">UCC</span>United Changers</div>
+    <div style="display:flex;align-items:center;gap:20px;">
+      <a href="#tiers" style="font-family:'JetBrains Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:0.12em;color:var(--ink);text-decoration:none;">Reserve</a>
+      <a href="#rsvp" style="font-family:'JetBrains Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:0.12em;color:var(--ink);text-decoration:none;">RSVP</a>
+      <span class="private-badge">Invite Only</span>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="private-hero">
+    <div class="private-hero-inner">
+      <div class="hero-left inner-animate">
+        <div class="hero-eyebrow">You're on the list</div>
+        <h1 class="hero-h1">
+          The<br/>
+          <em>Founders'</em><br/>
+          Dinner
+        </h1>
+        <p class="hero-desc">
+          Fifty to sixty people. One evening. This is the room where UCC gets funded. An invitation-only dinner for the founders and civic leaders who are putting serious resources behind Georgia's next generation of voters — before this is a household name.
+        </p>
+        <div class="hero-meta">
+          <div class="hero-meta-item">
+            <div class="hmi-label">Date</div>
+            <div class="hmi-val">TBD · 2026</div>
+          </div>
+          <div class="hero-meta-item">
+            <div class="hmi-label">Location</div>
+            <div class="hmi-val">Atlanta, GA</div>
+          </div>
+          <div class="hero-meta-item">
+            <div class="hmi-label">Dress</div>
+            <div class="hmi-val">Black Tie</div>
+          </div>
+        </div>
+      </div>
+      <div class="hero-right inner-animate" style="animation-delay:0.15s">
+        <div class="goal-box">
+          <div class="goal-box-header">
+            <span>Fundraising Goal</span>
+            <span id="pctLabel">0% raised</span>
+          </div>
+          <div class="goal-amount">$500K</div>
+          <div class="goal-label">UCC Education Fund · 501(c)(3)</div>
+          <div class="progress-track">
+            <div class="progress-fill" id="progressFill"></div>
+          </div>
+          <div class="progress-labels">
+            <span>$0</span>
+            <span>$250K</span>
+            <span>$500K</span>
+          </div>
+          <div class="goal-seats">
+            <div class="seat-stat">
+              <div class="seat-num" style="color:var(--amber);">60</div>
+              <div class="seat-lbl">Total Seats</div>
+            </div>
+            <div class="seat-stat">
+              <div class="seat-num" style="color:var(--green);">0</div>
+              <div class="seat-lbl">Reserved</div>
+            </div>
+            <div class="seat-stat">
+              <div class="seat-num" style="color:var(--red);">60</div>
+              <div class="seat-lbl">Remaining</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- TWO TIERS — Patron & Benefactor -->
+  <section class="private-tiers" id="tiers">
+    <div class="pt-inner">
+      <div class="section-eyebrow">Reserve Your Seat</div>
+      <h2 class="section-h">Reserve your seats. <em>$5,000 each.</em></h2>
+      <p class="section-sub">This dinner is 50 seats — invitation only. Each seat is $5,000. Reserve one or bring a full table. All contributions benefit the UCC Education Fund (501(c)(3)) — tax-deductible to the extent permitted by law.</p>
+
+      <div class="c3-bar">
+        <span class="c3-pill">C3 Compliant</span>
+        <p>All dinner contributions go exclusively to the <strong>UCC Education Fund, a 501(c)(3) nonprofit</strong>. Nonpartisan civic education, the UCC app, and HBCU-anchored programs across Georgia. Tax-deductible. No connection to any candidate, campaign, or PAC.</p>
+      </div>
+
+      <div class="tiers-grid" style="grid-template-columns: 1fr 1fr 1fr;">
+
+        <div class="tier">
+          <span class="tier-tag tag-red">Single</span>
+          <div class="tier-price">$5,000</div>
+          <div class="tier-price-note">1 seat</div>
+          <div class="tier-name">One Seat</div>
+          <ul class="tier-list">
+            <li>One reserved dinner seat</li>
+            <li>Private pre-dinner reception</li>
+            <li>Named on UCC founding wall</li>
+            <li>Quarterly leadership briefings</li>
+            <li>Early access to the UCC civic app</li>
+            <li>Year-1 donor impact report</li>
+          </ul>
+          <button class="tier-btn" onclick="scrollToRSVP('1')">Reserve 1 Seat →</button>
+        </div>
+
+        <div class="tier hot">
+          <span class="tier-tag tag-amber">Popular</span>
+          <div class="tier-price">$10,000</div>
+          <div class="tier-price-note">2 seats · most popular</div>
+          <div class="tier-name">Two Seats</div>
+          <ul class="tier-list">
+            <li>Two reserved seats</li>
+            <li>Premier table placement</li>
+            <li>Private reception — dedicated Founder time</li>
+            <li>Monthly leadership updates, 12 months</li>
+            <li>UCC app feature credit</li>
+            <li>Advisory strategy session invitations</li>
+            <li>Year-1 &amp; Year-2 donor recognition</li>
+          </ul>
+          <button class="tier-btn" onclick="scrollToRSVP('2')">Reserve 2 Seats →</button>
+        </div>
+
+        <div class="tier" style="border-color:var(--plum);">
+          <span class="tier-tag" style="background:var(--plum);color:#fff;">Full Table</span>
+          <div class="tier-price">$25,000</div>
+          <div class="tier-price-note">5 seats · own the table</div>
+          <div class="tier-name">Table of Five</div>
+          <ul class="tier-list">
+            <li>Five reserved seats — full table</li>
+            <li>Premium table location &amp; named placard</li>
+            <li>Dedicated reception time with Founder</li>
+            <li>Co-branding in Year-1 materials</li>
+            <li>All Two-Seat benefits for every guest</li>
+            <li>Year-1 &amp; Year-2 recognition</li>
+          </ul>
+          <button class="tier-btn" onclick="scrollToRSVP('5')" style="background:var(--plum);color:#fff;border-color:var(--plum);">Reserve a Table →</button>
+        </div>
+
+      </div>
+
+      <div style="margin-top:16px;text-align:center;font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:0.08em;color:rgba(0,0,0,0.45);">
+        Need 3 or 4 seats? Pick your count in the form below — all at $5,000 per seat.
+      </div>
+
+      <div style="margin-top:20px;padding:16px 20px;border:1px solid rgba(0,0,0,0.1);font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:rgba(0,0,0,0.4);line-height:1.8;">
+        This dinner is limited to 50 seats by design. Seats will not be added. If you received this invitation, you are part of the first cohort being asked to build UCC from the ground up. Payment instructions are provided upon confirmation of your reservation.
+      </div>
+    </div>
+  </section>
+
+  <!-- RSVP FORM -->
+  <section class="rsvp-section" id="rsvp">
+    <div class="rsvp-inner">
+      <div class="rsvp-form-card">
+        <div class="rsvp-form-header">
+          <h3>Reserve your seat</h3>
+          <span>Secure · Invite Only</span>
+        </div>
+        <div class="rsvp-form-body">
+          <div class="form-row">
+            <div>
+              <label class="form-label" for="fname">First name</label>
+              <input class="form-input" id="fname" type="text" placeholder="First" />
+            </div>
+            <div>
+              <label class="form-label" for="lname">Last name</label>
+              <input class="form-input" id="lname" type="text" placeholder="Last" />
+            </div>
+          </div>
+          <label class="form-label" for="email">Email</label>
+          <input class="form-input form-full" id="email" type="email" placeholder="your@email.com" style="width:100%;margin-bottom:0;" />
+
+          <label class="form-label" for="org">Organization / Company</label>
+          <input class="form-input form-full" id="org" type="text" placeholder="Where do you work or lead?" style="width:100%;margin-bottom:0;" />
+
+          <label class="form-label" for="tier">Number of seats <span style="font-weight:400;font-size:12px;opacity:0.55;">($5,000 per seat)</span></label>
+          <select class="form-select" id="tier" style="width:100%;margin-bottom:0;">
+            <option value="">Select number of seats...</option>
+            <option value="1">1 seat — $5,000</option>
+            <option value="2">2 seats — $10,000</option>
+            <option value="3">3 seats — $15,000</option>
+            <option value="4">4 seats — $20,000</option>
+            <option value="5">5 seats (full table) — $25,000</option>
+            <option value="custom">More than 5 seats — contact us</option>
+          </select>
+
+          <label class="form-label" for="dietary">Dietary needs / accessibility</label>
+          <input class="form-input form-full" id="dietary" type="text" placeholder="Vegetarian, gluten-free, wheelchair access, etc." style="width:100%;margin-bottom:0;" />
+
+          <label class="form-label" for="payment">Payment preference</label>
+          <div id="payment-options" style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:0;">
+            <div class="payment-opt" id="opt-prepay" onclick="selectPayment('prepay')" style="border:2px solid var(--ink);padding:16px 14px;cursor:pointer;background:var(--paper);transition:all 0.15s ease;">
+              <div style="font-family:'Fraunces',serif;font-weight:900;font-size:18px;letter-spacing:-0.01em;margin-bottom:4px;">Prepay Now</div>
+              <div style="font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:0.1em;opacity:0.55;line-height:1.5;">Secure your seat immediately. Wire or card instructions sent within 24 hrs.</div>
+            </div>
+            <div class="payment-opt" id="opt-door" onclick="selectPayment('door')" style="border:2px solid var(--ink);padding:16px 14px;cursor:pointer;background:var(--paper);transition:all 0.15s ease;">
+              <div style="font-family:'Fraunces',serif;font-weight:900;font-size:18px;letter-spacing:-0.01em;margin-bottom:4px;">Pay at Event</div>
+              <div style="font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:0.1em;opacity:0.55;line-height:1.5;">Commit now, pay on the evening. Seat held on your word.</div>
+            </div>
+          </div>
+          <input type="hidden" id="payment" value="" />
+
+          <label class="form-label" for="note">Note to UCC leadership (optional)</label>
+          <textarea class="form-textarea" id="note" placeholder="Who referred you? Anything we should know before the evening?"></textarea>
+
+          <div style="font-family:'JetBrains Mono',monospace;font-size:9.5px;color:rgba(0,0,0,0.35);line-height:1.8;margin:14px 0;border:1px solid rgba(0,0,0,0.1);padding:12px;">
+            CONTRIBUTIONS BENEFIT THE UCC EDUCATION FUND, A 501(C)(3) TAX-EXEMPT ORGANIZATION. TAX-DEDUCTIBLE TO THE EXTENT PERMITTED BY LAW. NOT AUTHORIZED BY ANY CANDIDATE. PAYMENT INSTRUCTIONS WILL BE PROVIDED UPON CONFIRMATION OF YOUR RESERVATION.
+          </div>
+
+          <button class="rsvp-submit" id="rsvpSubmitBtn" onclick="submitRSVP()">Submit Reservation →</button>
+
+          <!-- FULL CONFIRMATION CARD — shown after submit -->
+          <div id="rsvpSuccess" style="display:none;margin-top:8px;">
+
+            <!-- Header bar -->
+            <div style="background:var(--ink);color:var(--bg);padding:20px 28px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;">
+              <div>
+                <div style="font-family:'Fraunces',serif;font-weight:900;font-size:26px;letter-spacing:-0.02em;line-height:1;">You're in.</div>
+                <div style="font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:0.14em;opacity:0.6;margin-top:4px;">UCC Founders' Dinner · Atlanta, GA</div>
+              </div>
+              <div style="text-align:right;">
+                <div style="font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:0.14em;color:var(--amber);">✓ Reservation confirmed</div>
+                <div style="font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:0.1em;opacity:0.5;margin-top:4px;">Check your email now</div>
+              </div>
+            </div>
+
+            <div style="border:2px solid var(--ink);border-top:none;background:var(--paper);">
+
+              <!-- Confirmed details row -->
+              <div style="display:grid;grid-template-columns:1fr 1fr 1fr;border-bottom:2px solid var(--ink);">
+                <div style="padding:18px 20px;border-right:2px solid var(--ink);">
+                  <div style="font-family:'JetBrains Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:0.16em;opacity:0.5;margin-bottom:6px;">Guest</div>
+                  <div id="confirm-name" style="font-family:'Fraunces',serif;font-weight:900;font-size:17px;letter-spacing:-0.01em;"></div>
+                </div>
+                <div style="padding:18px 20px;border-right:2px solid var(--ink);">
+                  <div style="font-family:'JetBrains Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:0.16em;opacity:0.5;margin-bottom:6px;">Tier</div>
+                  <div id="confirm-tier" style="font-family:'Fraunces',serif;font-weight:900;font-size:17px;letter-spacing:-0.01em;color:var(--red);"></div>
+                </div>
+                <div style="padding:18px 20px;">
+                  <div style="font-family:'JetBrains Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:0.16em;opacity:0.5;margin-bottom:6px;">Payment</div>
+                  <div id="confirm-payment" style="font-family:'Fraunces',serif;font-weight:900;font-size:17px;letter-spacing:-0.01em;"></div>
+                </div>
+              </div>
+
+              <!-- Event details block (mirrors email) -->
+              <div style="padding:24px 28px;border-bottom:2px solid var(--ink);background:#fff;">
+                <div style="font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:0.18em;color:var(--red);margin-bottom:16px;">Event Details — in your confirmation email</div>
+                <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px;">
+                  <div style="padding:14px 16px;border:1.5px solid var(--ink);">
+                    <div style="font-family:'JetBrains Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:0.14em;opacity:0.5;margin-bottom:4px;">Date</div>
+                    <div style="font-family:'Fraunces',serif;font-weight:900;font-size:15px;">TBD · 2026</div>
+                    <div style="font-size:12px;color:#555;margin-top:2px;">Atlanta, Georgia</div>
+                  </div>
+                  <div style="padding:14px 16px;border:1.5px solid var(--ink);">
+                    <div style="font-family:'JetBrains Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:0.14em;opacity:0.5;margin-bottom:4px;">Format</div>
+                    <div style="font-family:'Fraunces',serif;font-weight:900;font-size:15px;">Private Dinner</div>
+                    <div style="font-size:12px;color:#555;margin-top:2px;">50 seats · invitation only</div>
+                  </div>
+                  <div style="padding:14px 16px;border:1.5px solid var(--ink);">
+                    <div style="font-family:'JetBrains Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:0.14em;opacity:0.5;margin-bottom:4px;">Dress</div>
+                    <div style="font-family:'Fraunces',serif;font-weight:900;font-size:15px;">Business Formal</div>
+                    <div style="font-size:12px;color:#555;margin-top:2px;">Black tie optional</div>
+                  </div>
+                  <div style="padding:14px 16px;border:1.5px solid var(--ink);">
+                    <div style="font-family:'JetBrains Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:0.14em;opacity:0.5;margin-bottom:4px;">Funds</div>
+                    <div style="font-family:'Fraunces',serif;font-weight:900;font-size:15px;">UCC C3 Fund</div>
+                    <div style="font-size:12px;color:#555;margin-top:2px;">Education &amp; civic app</div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Payment instruction block — changes based on choice -->
+              <div id="confirm-payment-detail" style="padding:24px 28px;border-bottom:2px solid var(--ink);">
+              </div>
+
+              <!-- What's next -->
+              <div style="padding:24px 28px;">
+                <div style="font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:0.18em;color:var(--red);margin-bottom:14px;">What happens next</div>
+                <div id="confirm-next-steps"></div>
+                <div style="margin-top:20px;padding:14px 16px;border:1.5px solid rgba(0,0,0,0.12);background:rgba(0,0,0,0.02);display:flex;align-items:center;gap:12px;">
+                  <span style="font-size:20px;">📩</span>
+                  <div>
+                    <div style="font-size:13px;font-weight:700;margin-bottom:2px;">Confirmation sent to <span id="confirm-email" style="color:var(--red);"></span></div>
+                    <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:rgba(0,0,0,0.45);letter-spacing:0.04em;">Check your inbox (and spam) — it should arrive within a few minutes</div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="rsvp-info">
+        <div class="info-block">
+          <div class="info-label">Why this room matters</div>
+          <div class="info-val">The founding cohort.</div>
+          <div class="info-desc">The people in this room on dinner night become the first chapter of UCC's founding story. Your name — and your resources — are part of what makes the next eight years possible.</div>
+        </div>
+        <div class="info-block">
+          <div class="info-label">Who's in the room</div>
+          <ul class="who-list">
+            <li>Civic and community leaders across metro Atlanta</li>
+            <li>HBCU administrators and alumni network leaders</li>
+            <li>D9 fraternity and sorority regional leadership</li>
+            <li>Corporate sustainability and DEI leads</li>
+            <li>Foundation officers with civic / voting rights focus</li>
+            <li>Youth culture creators and trusted community messengers</li>
+          </ul>
+        </div>
+        <div class="info-block">
+          <div class="info-label">What your seat funds</div>
+          <div class="info-desc" style="margin-bottom:10px;">Every dollar from dinner goes to the <strong>UCC Education Fund (C3)</strong> — not the PAC. Specifically:</div>
+          <ul class="who-list">
+            <li>The UCC civic app and 8-Year Voter Journey platform</li>
+            <li>HBCU-anchored programming across 10 GA regions</li>
+            <li>Youth civic education curriculum (ages 13–25)</li>
+            <li>Creator and trusted messenger program</li>
+          </ul>
+        </div>
+        <div class="info-block">
+          <div class="info-label">Questions?</div>
+          <div class="info-desc">Reach out directly to UCC leadership. Contact details are in your original invitation. All communications from this portal are encrypted and shared only with UCC team members.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LEGAL FOOTER -->
+  <footer class="legal-footer">
+    <div class="legal-footer-inner">
+      <div>
+        <div class="logo-small">UCC</div>
+        <div>© 2026 United Changers Coalition</div>
+        <div style="margin-top:6px;opacity:0.6;">This page is private and accessible by invitation only.</div>
+      </div>
+      <div style="max-width:640px;">
+        UCC EDUCATION FUND, INC. IS A 501(C)(3) TAX-EXEMPT ORGANIZATION. CONTRIBUTIONS ARE TAX-DEDUCTIBLE TO THE EXTENT PERMITTED BY LAW. EIN: [PENDING FILING]. ALL DINNER CONTRIBUTIONS GO EXCLUSIVELY TO THE C3 EDUCATION FUND AND HAVE NO RELATIONSHIP TO THE UCC ACTION FUND (SUPER PAC) OR ANY CANDIDATE CAMPAIGN. NOT AUTHORIZED BY ANY CANDIDATE OR CANDIDATE'S COMMITTEE. · THIS PAGE IS DISTRIBUTED BY PERSONAL INVITATION ONLY. UNAUTHORIZED DISTRIBUTION OF THE ACCESS CODE IS PROHIBITED.
+      </div>
+    </div>
+  </footer>
+
+</div><!-- /inner -->
+
+<script>
+const VALID_CODES = ['UCC2026','FOUNDERS26','CHANGERS','BUILDIT26','BLOCKPARTY'];
+
+function checkCode() {
+  const input = document.getElementById('codeInput');
+  const val = input.value.trim().toUpperCase();
+  const errEl = document.getElementById('gateError');
+  const successEl = document.getElementById('gateSuccess');
+  const btn = document.getElementById('gateBtn');
+
+  errEl.textContent = '';
+  input.classList.remove('error','success');
+
+  if (!val) {
+    errEl.textContent = 'Enter your access code';
+    input.classList.add('error');
+    return;
+  }
+
+  if (VALID_CODES.includes(val)) {
+    input.classList.add('success');
+    successEl.style.display = 'block';
+    btn.classList.add('loading');
+    btn.textContent = 'Unlocking…';
+
+    setTimeout(() => {
+      document.getElementById('gate').style.display = 'none';
+      const inner = document.getElementById('inner');
+      inner.style.display = 'block';
+      document.body.style.background = 'var(--bg)';
+
+      setTimeout(() => {
+        document.getElementById('progressFill').style.width = '17%';
+        document.getElementById('pctLabel').textContent = '17% raised';
+      }, 400);
+    }, 1200);
+  } else {
+    input.classList.add('error');
+    errEl.textContent = 'Invalid code — check your invitation';
+    setTimeout(() => { errEl.textContent = ''; }, 3500);
+  }
+}
+
+document.getElementById('codeInput').addEventListener('keydown', function(e) {
+  if (e.key === 'Enter') checkCode();
+});
+
+function scrollToRSVP(tier) {
+  const sel = document.getElementById('tier');
+  if (tier === '1' || tier.includes('Patron')) sel.value = '1';
+  else if (tier === '2' || tier.includes('Benefactor')) sel.value = '2';
+  else if (tier === '3') sel.value = '3';
+  else if (tier === '4') sel.value = '4';
+  else if (tier === '5' || tier.includes('Table')) sel.value = '5';
+  document.getElementById('rsvp').scrollIntoView({behavior:'smooth'});
+  setTimeout(() => document.getElementById('fname').focus(), 600);
+}
+
+// Payment option selector
+function selectPayment(choice) {
+  document.getElementById('payment').value = choice;
+  const prepay = document.getElementById('opt-prepay');
+  const door   = document.getElementById('opt-door');
+  if (choice === 'prepay') {
+    prepay.style.background = '#0E0E0E';
+    prepay.style.color = '#FFFCF5';
+    prepay.querySelectorAll('div').forEach(d => d.style.color = '#FFFCF5');
+    door.style.background = '#FAF1DC';
+    door.style.color = '#0E0E0E';
+    door.querySelectorAll('div').forEach(d => d.style.color = '');
+  } else {
+    door.style.background = '#0E0E0E';
+    door.style.color = '#FFFCF5';
+    door.querySelectorAll('div').forEach(d => d.style.color = '#FFFCF5');
+    prepay.style.background = '#FAF1DC';
+    prepay.style.color = '#0E0E0E';
+    prepay.querySelectorAll('div').forEach(d => d.style.color = '');
+  }
+}
+
+// Build the in-page confirmation card
+function showConfirmationCard(fname, lname, email, tierLabel, paymentChoice) {
+  const isPrepay = paymentChoice === 'prepay';
+
+  document.getElementById('confirm-name').textContent = `${fname} ${lname}`;
+  document.getElementById('confirm-tier').textContent = tierLabel;
+  document.getElementById('confirm-payment').textContent = isPrepay ? 'Prepay' : 'Pay at Event';
+  document.getElementById('confirm-email').textContent = email;
+
+  // Payment instruction block
+  const detail = document.getElementById('confirm-payment-detail');
+  if (isPrepay) {
+    detail.innerHTML = `
+      <div style="display:flex;align-items:flex-start;gap:16px;">
+        <div style="background:#2A9D8F;color:#fff;padding:8px 14px;font-family:'JetBrains Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:0.14em;white-space:nowrap;flex-shrink:0;margin-top:2px;">Prepay</div>
+        <div>
+          <div style="font-family:'Fraunces',serif;font-weight:900;font-size:18px;letter-spacing:-0.01em;margin-bottom:6px;">Payment instructions incoming.</div>
+          <div style="font-size:13px;line-height:1.65;color:#333;">UCC leadership will send wire transfer or card payment instructions to <strong>${email}</strong> within 24 hours. Your seat is held for 72 hours pending receipt of payment. Prepaid seats receive priority placement.</div>
+        </div>
+      </div>`;
+  } else {
+    detail.innerHTML = `
+      <div style="display:flex;align-items:flex-start;gap:16px;">
+        <div style="background:#5B2A86;color:#fff;padding:8px 14px;font-family:'JetBrains Mono',monospace;font-size:9px;text-transform:uppercase;letter-spacing:0.14em;white-space:nowrap;flex-shrink:0;margin-top:2px;">Pay at Event</div>
+        <div>
+          <div style="font-family:'Fraunces',serif;font-weight:900;font-size:18px;letter-spacing:-0.01em;margin-bottom:6px;">Your seat is held on your commitment.</div>
+          <div style="font-size:13px;line-height:1.65;color:#333;">We're holding your seat on your word. Payment of <strong>${tierLabel.includes('—') ? tierLabel.split('—')[1].trim() : 'your contribution'}</strong> is due at check-in on the evening of the event. Accepted: card, wire, or check. A reminder will be sent 7 days before the event.</div>
+        </div>
+      </div>`;
+  }
+
+  // Next steps
+  const steps = document.getElementById('confirm-next-steps');
+  const baseSteps = [
+    'Check your email — a confirmation has been sent to you now',
+    'UCC leadership will be in touch within 24 hours',
+    'Venue and logistics confirmed 14 days before the event',
+    'Questions? Reply directly to your confirmation email'
+  ];
+  if (isPrepay) baseSteps.splice(1, 0, 'Wire or card payment instructions sent within 24 hours — seat held for 72 hours');
+  else baseSteps.splice(1, 0, 'A payment reminder will be sent 7 days before the event');
+
+  steps.innerHTML = baseSteps.map(s =>
+    `<div style="padding:9px 0;border-bottom:1px solid rgba(0,0,0,0.08);font-size:13px;font-weight:600;display:flex;gap:10px;"><span style="color:#E63946;flex-shrink:0;">→</span>${s}</div>`
+  ).join('');
+}
+
+async function submitRSVP() {
+  const fname      = document.getElementById('fname').value.trim();
+  const lname      = document.getElementById('lname').value.trim();
+  const email      = document.getElementById('email').value.trim();
+  const org        = document.getElementById('org').value.trim();
+  const tierVal    = document.getElementById('tier').value;
+  const dietary    = document.getElementById('dietary').value.trim();
+  const note       = document.getElementById('note').value.trim();
+  const payment    = document.getElementById('payment').value;
+
+  if (!fname || !email || !tierVal) {
+    alert('Please fill in your first name, email, and contribution tier.');
+    return;
+  }
+  if (!payment) {
+    alert('Please select a payment preference — prepay or pay at the event.');
+    document.getElementById('payment-options').scrollIntoView({behavior:'smooth'});
+    return;
+  }
+
+  const seatCount    = parseInt(tierVal) || 1;
+  const totalAmt     = tierVal === 'custom' ? 'Contact UCC' : `$${(seatCount * 5000).toLocaleString()}`;
+  const tierLabel    = tierVal === 'custom' ? 'Premium Table — contact UCC' : `${seatCount} seat${seatCount > 1 ? 's' : ''} — ${totalAmt}`;
+  const seatsLabel   = tierVal === 'custom' ? '6+ seats' : `${seatCount} seat${seatCount > 1 ? 's' : ''}`;
+  const paymentLabel = payment === 'prepay' ? 'Prepay — instructions within 24 hrs' : 'Pay at Event — seat held on commitment';
+
+  const btn = document.getElementById('rsvpSubmitBtn');
+  btn.textContent = 'Submitting…';
+  btn.disabled = true;
+
+  try {
+    const res = await fetch('/api/rsvp', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, fname, lname, org, tierLabel, seatsLabel, paymentLabel, dietary, note, payment })
+    });
+
+    const data = await res.json();
+    if (!res.ok || !data.success) throw new Error(data.error || 'Submission failed');
+
+    // Hide form fields, show confirmation card — make sure parent is visible
+    document.querySelector('.rsvp-form-body').style.display = 'none';
+    const successEl = document.getElementById('rsvpSuccess');
+    successEl.style.display = 'block';
+    // Ensure every ancestor up to .rsvp-form-card is visible
+    let el = successEl.parentElement;
+    while (el && !el.classList.contains('rsvp-form-card')) {
+      el.style.display = '';
+      el = el.parentElement;
+    }
+    showConfirmationCard(fname, lname, email, tierLabel, payment);
+    setTimeout(() => successEl.scrollIntoView({behavior:'smooth', block:'start'}), 80);
+
+  } catch (err) {
+    console.error(err);
+    btn.textContent = 'Submit Reservation →';
+    btn.disabled = false;
+    alert('Something went wrong. Please try again or contact UCC directly.');
+  }
+}
+
+function selectAmount(btn, val) {
+  document.querySelectorAll('.pac-amount-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  if (val !== 'custom') document.getElementById('customAmt').value = val;
+  else document.getElementById('customAmt').focus();
+}
+</script>
+</body>
+</html>
