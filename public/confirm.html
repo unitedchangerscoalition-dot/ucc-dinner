@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Reservation Confirmed — UCC Founders' Dinner</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,900;1,900&family=Bricolage+Grotesque:wght@400;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg:    #FFFCF5;
+      --ink:   #0E0E0E;
+      --red:   #E63946;
+      --amber: #F4A261;
+      --green: #2A9D8F;
+      --plum:  #5B2A86;
+      --paper: #FAF1DC;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: 'Bricolage Grotesque', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 32px;
+      border-bottom: 2px solid var(--ink);
+    }
+    .nav-logo { font-family: 'Fraunces', serif; font-weight: 900; font-size: 18px; letter-spacing: -0.02em; }
+    .nav-tag  { font-family: 'JetBrains Mono', monospace; font-size: 10px; text-transform: uppercase; letter-spacing: 0.14em; opacity: 0.5; }
+
+    .wrap {
+      flex: 1;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      padding: 48px 16px 80px;
+    }
+    .card {
+      width: 100%;
+      max-width: 600px;
+      border: 2px solid var(--ink);
+      background: #fff;
+    }
+
+    /* Header */
+    .card-header {
+      background: var(--plum);
+      color: #fff;
+      padding: 32px 36px;
+    }
+    .eyebrow {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--amber);
+      margin-bottom: 10px;
+    }
+    .headline {
+      font-family: 'Fraunces', serif;
+      font-weight: 900;
+      font-size: 28px;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+    }
+
+    /* Summary */
+    .summary {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      border-bottom: 2px solid var(--ink);
+    }
+    .summary-item {
+      padding: 20px 24px;
+      border-right: 1px solid rgba(0,0,0,0.12);
+    }
+    .summary-item:last-child { border-right: none; }
+    .s-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 9px;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      opacity: 0.45;
+      margin-bottom: 6px;
+    }
+    .s-value {
+      font-family: 'Fraunces', serif;
+      font-weight: 900;
+      font-size: 15px;
+      letter-spacing: -0.01em;
+    }
+
+    /* Body */
+    .body { padding: 32px 36px; }
+    .body-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--red);
+      margin-bottom: 20px;
+    }
+    .note {
+      background: var(--paper);
+      border: 1px solid rgba(0,0,0,0.1);
+      padding: 20px 24px;
+      font-size: 14px;
+      line-height: 1.7;
+      margin-bottom: 28px;
+    }
+    .note strong { font-weight: 700; }
+
+    /* Steps */
+    .steps-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--red);
+      margin-bottom: 16px;
+    }
+    .step {
+      padding: 11px 0;
+      border-bottom: 1px solid rgba(0,0,0,0.07);
+      font-size: 13px;
+      font-weight: 600;
+      display: flex;
+      gap: 10px;
+    }
+    .step span { color: var(--plum); flex-shrink: 0; }
+    .step:last-child { border-bottom: none; }
+
+    @media (max-width: 540px) {
+      .nav { padding: 14px 16px; }
+      .card-header { padding: 24px 20px; }
+      .summary { grid-template-columns: 1fr 1fr; }
+      .summary-item:nth-child(3) { border-top: 1px solid rgba(0,0,0,0.12); grid-column: span 2; }
+      .body { padding: 24px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="nav">
+    <div class="nav-logo">UCC Founders' Dinner</div>
+    <div class="nav-tag">Confirmed</div>
+  </nav>
+
+  <div class="wrap">
+    <div class="card">
+
+      <div class="card-header">
+        <div class="eyebrow">Reservation Confirmed</div>
+        <div class="headline">Your seat<br><em>is reserved.</em></div>
+      </div>
+
+      <div class="summary">
+        <div class="summary-item">
+          <div class="s-label">Guest</div>
+          <div class="s-value" id="c-name">—</div>
+        </div>
+        <div class="summary-item">
+          <div class="s-label">Seats</div>
+          <div class="s-value" id="c-tier">—</div>
+        </div>
+        <div class="summary-item">
+          <div class="s-label">Amount due</div>
+          <div class="s-value" id="c-amount">—</div>
+        </div>
+      </div>
+
+      <div class="body">
+        <div class="body-label">Your Reservation</div>
+        <div class="note">
+          <strong>Payment is due at the event.</strong> Accepted methods: card, wire transfer, or check.
+          A payment reminder will be sent 7 days before the event. Check your email — a confirmation has been sent to you now.
+        </div>
+
+        <div class="steps-label">What happens next</div>
+        <div class="step"><span>→</span>Check your email — confirmation sent now</div>
+        <div class="step"><span>→</span>A payment reminder arrives 7 days before the event</div>
+        <div class="step"><span>→</span>Formal invitation and event details sent 14 days out</div>
+        <div class="step"><span>→</span>UCC leadership will be in touch personally</div>
+        <div class="step"><span>→</span>Logistics pack sent 72 hours before the event</div>
+        <div class="step"><span>→</span>Questions? Reply directly to your confirmation email</div>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    const p      = new URLSearchParams(window.location.search);
+    const name   = p.get('name')   || '';
+    const tier   = p.get('tier')   || '';
+    const amount = p.get('amount') || '';
+    if (name)   document.getElementById('c-name').textContent   = name;
+    if (tier)   document.getElementById('c-tier').textContent   = tier;
+    if (amount) document.getElementById('c-amount').textContent = amount;
+  </script>
+
+</body>
+</html>

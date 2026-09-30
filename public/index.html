@@ -1470,32 +1470,17 @@ async function submitRSVP() {
     const data = await res.json();
     if (!res.ok || !data.success) throw new Error(data.error || 'Submission failed');
 
-    // Prepay → redirect to /pay with guest details; Pay at door → show inline card
-    if (payment === 'prepay') {
-      const seatCount = parseInt(tierVal) || 1;
-      const amount    = tierVal === 'custom' ? 'Contact UCC' : '$' + (seatCount * 5000).toLocaleString();
-      const params    = new URLSearchParams({
-        name:   fname + ' ' + lname,
-        tier:   seatsLabel,
-        amount: amount,
-        email:  email
-      });
-      window.location.href = '/pay?' + params.toString();
-      return; // navigation underway
-    }
-
-    // Pay at door — show inline confirmation card
-    document.querySelector('.rsvp-form-body').style.display = 'none';
-    const successEl = document.getElementById('rsvpSuccess');
-    successEl.style.display = 'block';
-    // Ensure every ancestor up to .rsvp-form-card is visible
-    let el = successEl.parentElement;
-    while (el && !el.classList.contains('rsvp-form-card')) {
-      el.style.display = '';
-      el = el.parentElement;
-    }
-    showConfirmationCard(fname, lname, email, tierLabel, payment);
-    setTimeout(() => successEl.scrollIntoView({behavior:'smooth', block:'start'}), 80);
+    // All paths redirect to a dedicated confirmation page
+    const seatCount = parseInt(tierVal) || 1;
+    const amount    = tierVal === 'custom' ? 'Contact UCC' : '$' + (seatCount * 5000).toLocaleString();
+    const dest      = payment === 'prepay' ? '/pay' : '/confirm';
+    const params    = new URLSearchParams({
+      name:   fname + ' ' + lname,
+      tier:   seatsLabel,
+      amount: amount,
+      email:  email
+    });
+    window.location.href = dest + '?' + params.toString();
 
   } catch (err) {
     console.error(err);
