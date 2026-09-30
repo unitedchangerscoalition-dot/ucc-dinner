@@ -1478,7 +1478,8 @@ async function submitRSVP() {
       name:   fname + ' ' + lname,
       tier:   seatsLabel,
       amount: amount,
-      email:  email
+      email:  email,
+      token:  data.token   // one-time server-issued token
     });
     window.location.href = dest + '?' + params.toString();
 

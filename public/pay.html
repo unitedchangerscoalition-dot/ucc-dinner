@@ -308,6 +308,13 @@
 
   <script>
     // Pull name, tier, amount from URL params set by the RSVP form
+
+    // ── Token guard ─────────────────────────────────────────────────────────
+    // This page is only reachable via a server-issued one-time token.
+    // If no token is present, bounce to the main site immediately.
+    const _params = new URLSearchParams(window.location.search);
+    if (!_params.get('token')) { window.location.replace('/'); }
+    // ────────────────────────────────────────────────────────────────────────
     const params = new URLSearchParams(window.location.search);
     const name   = params.get('name')   || '';
     const tier   = params.get('tier')   || '';

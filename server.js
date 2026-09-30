@@ -1,6 +1,22 @@
 const express = require('express');
-const path = require('path');
-const app = express();
+const path    = require('path');
+const crypto  = require('crypto');
+const app     = express();
+
+// ── One-time confirmation tokens ─────────────────────────────────────────────
+// Tokens are valid for 10 minutes and consumed on first use.
+const confirmTokens = new Map(); // token → { dest, expires }
+
+function issueToken(dest) {
+  const token   = crypto.randomBytes(24).toString('hex');
+  const expires = Date.now() + 10 * 60 * 1000; // 10 min
+  confirmTokens.set(token, { dest, expires });
+  // Purge stale tokens periodically
+  for (const [k, v] of confirmTokens) {
+    if (v.expires < Date.now()) confirmTokens.delete(k);
+  }
+  return token;
+}
 
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
@@ -168,13 +184,34 @@ app.post('/api/rsvp', async (req, res) => {
       console.log('Airtable record created successfully');
     }
 
-    return res.status(200).json({ success: true });
+    // Issue a short-lived token so the client can access the gated confirmation page
+    const confirmToken = issueToken('confirm');
+    return res.status(200).json({ success: true, token: confirmToken });
 
   } catch (err) {
     console.error('RSVP error:', err);
     return res.status(500).json({ error: 'Submission failed' });
   }
 });
+
+// ── Gated confirmation pages ─────────────────────────────────────────────────
+function serveGated(page) {
+  return (req, res) => {
+    const token = req.query.token;
+    if (!token) return res.redirect('/');
+    const entry = confirmTokens.get(token);
+    if (!entry || entry.expires < Date.now()) {
+      confirmTokens.delete(token);
+      return res.redirect('/');
+    }
+    // Consume the token (one-time use)
+    confirmTokens.delete(token);
+    res.sendFile(path.join(__dirname, 'public', page));
+  };
+}
+
+app.get('/confirm', serveGated('confirm.html'));
+app.get('/pay',     serveGated('pay.html'));
 
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));

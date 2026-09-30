@@ -198,6 +198,12 @@
   </div>
 
   <script>
+
+    // ── Token guard ─────────────────────────────────────────────────────────
+    // This page is only reachable via a server-issued one-time token.
+    const _qp = new URLSearchParams(window.location.search);
+    if (!_qp.get('token')) { window.location.replace('/'); }
+    // ────────────────────────────────────────────────────────────────────────
     const p      = new URLSearchParams(window.location.search);
     const name   = p.get('name')   || '';
     const tier   = p.get('tier')   || '';
