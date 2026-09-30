@@ -67,7 +67,7 @@ app.post('/api/rsvp', async (req, res) => {
       headers: { 'Content-Type': 'application/json', 'api-key': BREVO_KEY },
       body: JSON.stringify({
         to: [{ email, name: `${fname} ${lname}` }],
-        replyTo: { email: 'info@unitedchangerscoalition.org', name: 'UCC Founders\' Dinner' },
+        replyTo: { email: 'info@unitedchangerscoalition.org', name: 'United Changers Coalition' },
         templateId: isPrepay ? 2 : 1,
         params: {
           FNAME:            fname,
